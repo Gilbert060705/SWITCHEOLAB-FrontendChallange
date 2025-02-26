@@ -74,7 +74,7 @@ const WalletPage: React.FC<Props> = (props: Props) => {
   };
 
   //So, useMemo is a react hook that memoizes the the result of a function call whenever the dependencies change. There are some logical errors with the sorting : 
-  // 1. To sort out wallets with a blockchain and non-zero balance, the function given in the question only sorts out wallets with valid blockchain, but does not eliminate the non-zero balance wallets.
+  // 1. To sort out wallets with a blockchain and non-zero balance, the function given in the question only sorts out wallets with valid blockchain, but does not eliminate wallets that have less than 0 balance (which seems to rarely happen in this case as the balance of a digital wallet should not be less than 0)
   //2. There is if(lhsPriority > -99) that suddenly appaers out of nowhere, the lhsPriority is never defined, will throw an error. 
   //3. The sorting function is redundant, can be simplified in the given code. 
   //4. The balance shall be sorted everytime the balance changes, but if the balance does not change and the price changes, the sorting process shall not be done. Hence, we can get rid of the [prices] as the dependency of the useMemo().
